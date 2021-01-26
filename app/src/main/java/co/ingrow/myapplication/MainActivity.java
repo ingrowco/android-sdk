@@ -7,8 +7,10 @@ import android.view.View;
 
 import java.util.HashMap;
 
+import co.ingrow.android.InGrowLogging;
 import co.ingrow.android.action.InGrowClient;
 import co.ingrow.android.action.InGrowProject;
+import co.ingrow.android.action.InGrowSession;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,8 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //93839384692836429
-        InGrowClient.initialize(new InGrowClient.Builder(new InGrowProject("3d9e0e466f469bb05c35a80c179a5264e074706a", "29", "AndroidTest", "4692836429", null)).build());
+        InGrowClient.initialize(new InGrowClient.Builder(new InGrowProject("3d9e0e466f469bb05c35a80c179a5264e074706a", "29", "AndroidTest", true, "4692836429", null), getApplication()).build());
 
         findViewById(R.id.sendEventButton).setOnClickListener(v -> {
             HashMap events = new HashMap<>();
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             InGrowClient.client().logEvents(events);
+            InGrowClient.client().setDebugMode(true);
+            InGrowClient.enrichmentBySession(new InGrowSession(""));
         });
+
     }
 }

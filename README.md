@@ -30,7 +30,7 @@ it is possible to trace events related to specific user by defining `anonymous_i
 and you could define its USER_ID even after initialization by using:
 
 ```java
-    InGrowClient.enrichmentBySession(new InGrowSession("user_id"));
+InGrowClient.enrichmentBySession(new InGrowSession("user_id"));
 ```
 and you could trace user events even related to the before logging in activities.
 

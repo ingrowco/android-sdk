@@ -8,7 +8,7 @@ public class InGrowProject {
     private final String apiKey;
     private final boolean isLoggingEnable;
     private String anonymousId;
-    private String userId;
+    private String userId = null;
 
     public InGrowProject(String apiKey, String project, String stream, Boolean isLoggingEnable) {
         if (apiKey == null || apiKey.trim().isEmpty()) {

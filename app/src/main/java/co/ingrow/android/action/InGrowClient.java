@@ -117,23 +117,15 @@ public class InGrowClient {
             inGrowObject.put(Const.PROJECT, this.inGrowProject.getProject());
             inGrowObject.put(Const.STREAM, this.inGrowProject.getStream());
             for (Object key : events.keySet()) {
-
                 eventObject.put(String.valueOf(key), events.get(key));
             }
-            if (this.inGrowSession == null) {
-                if (this.inGrowProject.getAnonymousId() != null) {
-                    inputObject.put(ENRICHMENT_KEY.ANONYMOUS_ID.id, this.inGrowProject.getAnonymousId());
-                    if (this.inGrowProject.getUserId() != null)
-                        inputObject.put(ENRICHMENT_KEY.USER_ID.id, this.inGrowProject.getUserId());
-                    enrichmentObject.put(Const.NAME, Const.SESSION);
-                    enrichmentObject.put(Const.INPUT, inputObject);
-                    enrichmentArray.put(enrichmentObject);
-                    main.put(Const.ENRICHMENT, enrichmentArray);
-                }
-            } else {
-//                inputObject.put(ENRICHMENT_KEY.ANONYMOUS_ID.id, this.inGrowSession.getAnonymousId());
-                if (this.inGrowSession.getUserId() != null)
+            if (this.inGrowProject.getAnonymousId() != null) {
+                inputObject.put(ENRICHMENT_KEY.ANONYMOUS_ID.id, this.inGrowProject.getAnonymousId());
+                if (this.inGrowSession != null && this.inGrowSession.getUserId() != null) {
                     inputObject.put(ENRICHMENT_KEY.USER_ID.id, this.inGrowSession.getUserId());
+                }else {
+                    inputObject.put(ENRICHMENT_KEY.USER_ID.id, this.inGrowProject.getUserId() == null ? "" : this.inGrowProject.getUserId());
+                }
                 enrichmentObject.put(Const.NAME, Const.SESSION);
                 enrichmentObject.put(Const.INPUT, inputObject);
                 enrichmentArray.put(enrichmentObject);

@@ -1,3 +1,2 @@
-include ':Android'
 include ':app'
 rootProject.name = "AndroidSolution"

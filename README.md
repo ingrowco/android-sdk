@@ -11,12 +11,31 @@ Integrating InGrow with an Android application is pretty easy. Check out SAMPLE 
 ### Gradle
 
 ```groovy
-repositories {
-    mavenCentral()
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
 }
 dependencies {
-    implementation 'co.ingrow:'
+    implementation 'com.github.ingrowco:android-sdk:V1.0'
 }
+```
+
+### Maven
+
+```groovy
+<repositories>
+	<repository>
+        <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+<dependency>
+    <groupId>com.github.ingrowco</groupId>
+    <artifactId>android-sdk</artifactId>
+    <version>V1.0</version>
+</dependency>
 ```
 
 ### Initialize InGrow

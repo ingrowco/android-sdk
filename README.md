@@ -54,5 +54,6 @@ You might want to test logging events of your app and by this you could enable `
 ```java
 InGrowClient.client().setDebugMode(true);
 ```
+
 When debug mode is enabled, all exceptions will be thrown immediately, otherwise they will be logged and reported to
 any callbacks, but never thrown.

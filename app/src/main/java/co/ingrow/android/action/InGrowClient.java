@@ -110,15 +110,23 @@ public class InGrowClient {
         JSONObject main = new JSONObject();
         JSONObject inGrowObject = new JSONObject();
         JSONObject eventObject = new JSONObject();
-        JSONObject enrichmentObject = new JSONObject();
+        JSONObject enrichmentSessionObject = new JSONObject();
+        JSONObject enrichmentIPObject = new JSONObject();
         JSONArray enrichmentArray = new JSONArray();
         JSONObject inputObject = new JSONObject();
+        JSONObject inputIPObject = new JSONObject();
         try {
             inGrowObject.put(Const.PROJECT, this.inGrowProject.getProject());
             inGrowObject.put(Const.STREAM, this.inGrowProject.getStream());
             for (Object key : events.keySet()) {
                 eventObject.put(String.valueOf(key), events.get(key));
             }
+            // Events stream would always have IP ENRICHMENT and would be filled automatically
+            inputIPObject.put(Const.IP, Const.AUTO_FILL);
+            enrichmentIPObject.put(Const.NAME, Const.IP);
+            enrichmentIPObject.put(Const.INPUT, inputIPObject);
+            enrichmentArray.put(enrichmentIPObject);
+
             if (this.inGrowProject.getAnonymousId() != null) {
                 inputObject.put(ENRICHMENT_KEY.ANONYMOUS_ID.id, this.inGrowProject.getAnonymousId());
                 if (this.inGrowSession != null && this.inGrowSession.getUserId() != null) {
@@ -126,11 +134,11 @@ public class InGrowClient {
                 }else {
                     inputObject.put(ENRICHMENT_KEY.USER_ID.id, this.inGrowProject.getUserId() == null ? "" : this.inGrowProject.getUserId());
                 }
-                enrichmentObject.put(Const.NAME, Const.SESSION);
-                enrichmentObject.put(Const.INPUT, inputObject);
-                enrichmentArray.put(enrichmentObject);
-                main.put(Const.ENRICHMENT, enrichmentArray);
+                enrichmentSessionObject.put(Const.NAME, Const.SESSION);
+                enrichmentSessionObject.put(Const.INPUT, inputObject);
+                enrichmentArray.put(enrichmentSessionObject);
             }
+            main.put(Const.ENRICHMENT, enrichmentArray);
             main.put(Const.INGROW, inGrowObject);
             main.put(Const.EVENT, eventObject);
         } catch (JSONException e) {

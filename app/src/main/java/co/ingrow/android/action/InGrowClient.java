@@ -52,7 +52,6 @@ public class InGrowClient {
         InGrowClient client;
     }
 
-
     public static void initialize(InGrowClient client) {
         if (client == null) {
             throw new IllegalArgumentException("Client must not be null");
